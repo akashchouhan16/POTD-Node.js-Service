@@ -1,0 +1,22 @@
+{
+  "name": "poftd-server",
+  "version": "1.0.1",
+  "description": "Node server to power the POFTD-Client.",
+  "main": "application.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node application.js",
+    "dev": "nodemon application.js"
+  },
+  "author": "Akash Chouhan",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
