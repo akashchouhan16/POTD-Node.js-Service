@@ -15,8 +15,11 @@ const filterParameter = (req,res,next)=>{
     req.query = sanitizer(req.query);
     next();
 }
-/*Cron For Every Day @ midnight -> 0 0 0 * * ? */ 
-schedule.scheduleJob('*/20 * * * * *', function(){
+/*
+Cron For Every Day @ midnight -> | 0 0 0 * * ? |  
+Cron For Every hour -> | 0 0 * ? * * |
+*/ 
+schedule.scheduleJob('0 0 * ? * *', function(){
   iterator = (iterator+1)%LIMIT;
   console.log('Problem Of the Day Updated to Problem #' + iterator);
 });
@@ -31,12 +34,19 @@ router.get('/problemoftheday', async(req,res)=>{
         const problem_statement = question[0].problem_statement;
         const link = question[0].link;
         const topic = question[0].topic;
+
+        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateString = new Date().toLocaleDateString("en-US", options);
         const data = {
             status: 200,
-            message: `Problem Of The Day #${iterator}`,
-            problem: problem_statement || `Problem Statement is unavailable`,
-            link: link || `Link is unavailable`,
-            topic: topic || `Topic is unavailable`
+            message: `Problem Of The Day [Based on ${topic}]`,
+            day: dateString,
+            response: {
+                problem_id: iterator+100,
+                problem: problem_statement || `Problem Statement is unavailable`,
+                link: link || `Link is unavailable`,
+                topic: topic || `Topic is unavailable`
+            }
         }
         
         return res.status(200).json(data);

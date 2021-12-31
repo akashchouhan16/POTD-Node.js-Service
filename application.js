@@ -28,7 +28,7 @@ app.get('/', (req,res)=>{
 })
 
 const problemSchedulerRoute = require('./routes/problemScheduler.route');
-app.use('/api', problemSchedulerRoute)
+app.use('/', problemSchedulerRoute)
 
 app.listen(PORT, (req,res)=>{
     const LOG={
