@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const sanitizer = require('mongo-sanitize');
+const schedule = require('node-schedule');
 
 const problems = require('../model/problem.model');
 const {FALL_BACK_GET, FALL_BACK_POST} = require('../api-fallback-responses/fallbacks-router');
@@ -12,9 +13,15 @@ const LIMIT = 755;
 const filterParameter = (req,res,next)=>{
     req.body = sanitizer(req.body);
     req.query = sanitizer(req.query);
-    // console.log(`[*] Request Obj Sanitized`);
     next();
 }
+/*Cron For Every Day @ midnight -> 0 0 0 * * ? */ 
+schedule.scheduleJob('*/20 * * * * *', function(){
+  iterator = (iterator+1)%LIMIT;
+  console.log('Problem Of the Day Updated to Problem #' + iterator);
+});
+
+
 router.get('/problemoftheday', async(req,res)=>{
     try{
         if(!iterator)
@@ -31,7 +38,7 @@ router.get('/problemoftheday', async(req,res)=>{
             link: link || `Link is unavailable`,
             topic: topic || `Topic is unavailable`
         }
-        iterator = (iterator+1)%LIMIT;
+        
         return res.status(200).json(data);
 
     }catch(error){

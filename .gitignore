@@ -9,3 +9,6 @@ test/*.log
 
 # Environment Variables.
 .env
+
+# Access Logs
+access.log
