@@ -16,13 +16,15 @@ const filterParameter = (req,res,next)=>{
     next();
 }
 /*
-Cron For Every Day @ midnight -> | 0 0 0 * * ? |  
-Cron For Every hour -> | 0 0 * ? * * |
+Cron For Every Day @ midnight -> | 0 0 0 * * * |  
+Cron For Every hour -> | 0 0 * * * * |
 */ 
-schedule.scheduleJob('*/15 * * * * *', function(){
-  iterator = (iterator+1)%LIMIT;
-  console.log('Problem Of the Day Updated to Problem #' + iterator);
+let cachedProblem;
+schedule.scheduleJob('0 0 0 * * *', async function(){
+  iterator = Math.round(1 + Math.random()*LIMIT);
+  console.log('Problem Of the Day Updated to Problem #' + iterator); 
 });
+
 
 
 router.get('/problemoftheday', async(req,res)=>{
@@ -42,7 +44,7 @@ router.get('/problemoftheday', async(req,res)=>{
             message: `Problem Of The Day [Based on ${topic}]`,
             day: dateString,
             response: {
-                problem_id: iterator+100,
+                problem_id: iterator+1000,
                 problem: problem_statement || `Problem Statement is unavailable`,
                 link: link || `Link is unavailable`,
                 topic: topic || `Topic is unavailable`
