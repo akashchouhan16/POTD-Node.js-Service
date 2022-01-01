@@ -19,7 +19,7 @@ const filterParameter = (req,res,next)=>{
 Cron For Every Day @ midnight -> | 0 0 0 * * ? |  
 Cron For Every hour -> | 0 0 * ? * * |
 */ 
-schedule.scheduleJob('0 0 * ? * *', function(){
+schedule.scheduleJob('*/15 * * * * *', function(){
   iterator = (iterator+1)%LIMIT;
   console.log('Problem Of the Day Updated to Problem #' + iterator);
 });
