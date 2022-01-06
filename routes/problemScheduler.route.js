@@ -20,14 +20,14 @@ Cron For Every Day @ midnight -> | 0 0 0 * * * |
 Cron For Every hour -> | 0 0 * * * * |
 */ 
 let cachedProblem;
-schedule.scheduleJob('0 0 * * *', function(){
+schedule.scheduleJob('0 10 17 * * ?', function(){
   iterator = Math.round(1 + Math.random()*LIMIT);
   console.log('Problem Of the Day Updated to Problem #' + iterator); 
 });
 
 // For debugging
 let counter = 0;
-schedule.scheduleJob('0 */3 * * *', ()=>{
+schedule.scheduleJob('0 10 17 * * ?', ()=>{
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     let schedulerDateString = new Date().toLocaleDateString("en-IN", options);
     console.log(`Server Time: `, schedulerDateString);
