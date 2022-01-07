@@ -7,7 +7,7 @@ const schedule = require('node-schedule');
 const problems = require('../model/problem.model');
 const {FALL_BACK_GET, FALL_BACK_POST} = require('../api-fallback-responses/fallbacks-router');
 
-let iterator = 405;
+let iterator = 315;
 const LIMIT = 755;
 
 const filterParameter = (req,res,next)=>{
@@ -20,14 +20,14 @@ Cron For Every Day @ midnight -> | 0 0 0 * * * |
 Cron For Every hour -> | 0 0 * * * * |
 */ 
 let cachedProblem;
-schedule.scheduleJob('0 10 17 * * ?', function(){
+schedule.scheduleJob('0 * * ? * *', function(){
   iterator = Math.round(1 + Math.random()*LIMIT);
   console.log('Problem Of the Day Updated to Problem #' + iterator); 
 });
 
 // For debugging
 let counter = 0;
-schedule.scheduleJob('0 10 17 * * ?', ()=>{
+schedule.scheduleJob('0 * * ? * *', ()=>{
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     let schedulerDateString = new Date().toLocaleDateString("en-IN", options);
     console.log(`Server Time: `, schedulerDateString);
