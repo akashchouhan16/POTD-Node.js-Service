@@ -9,7 +9,7 @@ const {FALL_BACK_GET, FALL_BACK_POST} = require('../api-fallback-responses/fallb
 
 let iterator = 315;
 const LIMIT = 755;
-
+let counter = 0;
 const filterParameter = (req,res,next)=>{
     req.body = sanitizer(req.body);
     req.query = sanitizer(req.query);
@@ -21,21 +21,19 @@ Cron For Every hour -> | 0 0 * * * * |
 */ 
 let cachedProblem;
 schedule.scheduleJob('0 * * ? * *', function(){
-  iterator = Math.round(1 + Math.random()*LIMIT);
+  if(counter === 60){
+      iterator = Math.round(1 + Math.random()*LIMIT);
+      counter = 0;
+  }
+  counter= counter + 1;
   console.log('Problem Of the Day Updated to Problem #' + iterator); 
 });
 
 // For debugging
-let counter = 0;
 schedule.scheduleJob('0 * * ? * *', ()=>{
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     let schedulerDateString = new Date().toLocaleDateString("en-IN", options);
     console.log(`Server Time: `, schedulerDateString);
-    counter = counter+1;
-    if(counter == 3){
-        console.clear()
-        counter = 0; //reset.
-    }
 })
 
 router.get('/problemoftheday', async(req,res)=>{
