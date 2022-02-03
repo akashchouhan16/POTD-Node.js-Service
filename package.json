@@ -17,7 +17,8 @@
     "mongo-sanitize": "^1.1.0",
     "mongoose": "^6.1.4",
     "morgan": "^1.10.0",
-    "node-schedule": "^2.1.0"
+    "node-schedule": "^2.1.0",
+    "string-hash": "^1.1.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

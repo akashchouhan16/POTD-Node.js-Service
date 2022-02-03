@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const sanitizer = require('mongo-sanitize');
 const schedule = require('node-schedule');
+const hash_fxn = require('string-hash');
 
 const problems = require('../model/problem.model');
 const {FALL_BACK_GET, FALL_BACK_POST} = require('../api-fallback-responses/fallbacks-router');
@@ -19,28 +20,34 @@ const filterParameter = (req,res,next)=>{
 Cron For Every Day @ midnight -> | 0 0 0 * * * |  
 Cron For Every hour -> | 0 0 * * * * |
 */ 
-let cachedProblem;
-schedule.scheduleJob('0 * * ? * *', function(){
-  if(counter === 60){
-      iterator = Math.round(1 + Math.random()*LIMIT);
-      counter = 0;
-  }
-  counter= counter + 1;
-  console.log('Problem Of the Day Updated to Problem #' + iterator); 
-});
+// =======================================================================================
+// let cachedProblem;
+// schedule.scheduleJob('0 * * ? * *', function(){
+//   if(counter === 60){
+//       iterator = Math.round(1 + Math.random()*LIMIT);
+//       counter = 0;
+//   }
+//   counter= counter + 1;
+//   console.log('Problem Of the Day Updated to Problem #' + iterator); 
+// });
 
 // For debugging
-schedule.scheduleJob('0 * * ? * *', ()=>{
-    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    let schedulerDateString = new Date().toLocaleDateString("en-IN", options);
-    console.log(`Server Time: `, schedulerDateString);
-})
+// schedule.scheduleJob('0 * * ? * *', ()=>{
+//     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+//     let schedulerDateString = new Date().toLocaleDateString("en-IN", options);
+//     console.log(`Server Time: `, schedulerDateString);
+// })
+// =======================================================================================
 
 router.get('/problemoftheday', async(req,res)=>{
     try{
         if(!iterator)
             iterator = 1; //reset.
         
+        const key = req.query.key || '128';
+        const hash = hash_fxn(key);
+        iterator = Math.round(1+hash%LIMIT);
+
         const question = await problems.find({question_id: iterator});
         const problem_statement = question[0].problem_statement;
         const link = question[0].link;
