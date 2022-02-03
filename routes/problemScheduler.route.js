@@ -1,16 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const sanitizer = require('mongo-sanitize');
+const sanitizer = require('mongo-sanitize')
 const schedule = require('node-schedule');
 const hash_fxn = require('string-hash');
 
 const problems = require('../model/problem.model');
 const {FALL_BACK_GET, FALL_BACK_POST} = require('../api-fallback-responses/fallbacks-router');
+const sanitize = require('mongo-sanitize');
 
 let iterator = 315;
 const LIMIT = 755;
-let counter = 0;
+
 const filterParameter = (req,res,next)=>{
     req.body = sanitizer(req.body);
     req.query = sanitizer(req.query);
@@ -20,7 +21,7 @@ const filterParameter = (req,res,next)=>{
 Cron For Every Day @ midnight -> | 0 0 0 * * * |  
 Cron For Every hour -> | 0 0 * * * * |
 */ 
-// =======================================================================================
+// =============================== DISCARDED ====================================================
 // let cachedProblem;
 // schedule.scheduleJob('0 * * ? * *', function(){
 //   if(counter === 60){
@@ -39,20 +40,46 @@ Cron For Every hour -> | 0 0 * * * * |
 // })
 // =======================================================================================
 
+let cachedProblem={
+    question_id: 0,
+    problem_statement: "N/A",
+    topic: "N/A",
+    link: "N/A",
+    valid: false
+};
+
 router.get('/problemoftheday', async(req,res)=>{
     try{
         if(!iterator)
             iterator = 1; //reset.
         
-        const key = req.query.key || '128';
+        const value = req.query.key || '128';
+        const key = sanitize(value);
         const hash = hash_fxn(key);
         iterator = Math.round(1+hash%LIMIT);
 
-        const question = await problems.find({question_id: iterator});
-        const problem_statement = question[0].problem_statement;
-        const link = question[0].link;
-        const topic = question[0].topic;
-
+        let problem_statement,link,topic;
+        if(cachedProblem.valid === true && cachedProblem.question_id === iterator){
+            //prevent Network Request
+            problem_statement = cachedProblem.problem_statement;
+            link = cachedProblem.link;
+            topic = cachedProblem.topic;
+            console.log("Cache Hit For Question #" + iterator);
+        }else{
+            //Network Request to Atlas:
+            console.log("Cache Miss For Question #" + iterator);
+            const question = await problems.find({question_id: iterator});
+            problem_statement = question[0].problem_statement;
+            link = question[0].link;
+            topic = question[0].topic;
+            
+            //cache the problem
+            cachedProblem.question_id = iterator;
+            cachedProblem.problem_statement = problem_statement;
+            cachedProblem.link = link;
+            cachedProblem.topic = topic;
+            cachedProblem.valid = true;
+        }
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const dateString = new Date().toLocaleDateString("en-US", options);
         const data = {
