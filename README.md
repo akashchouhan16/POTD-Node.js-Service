@@ -1,9 +1,15 @@
 <img src='assets/POTD_logo.png' width='120px' style="border-radius:20px">
 
 # Problem Of The Day | Node.js microservice
-It is a Node.js microservice to power the problem of the day Google Chrome browser extension.
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-8ebb9c.svg)](https://github.com/Hack-Repository/POTD-Node.js-microservice "Repo Maintained")
+[![Ask Us Anything !](https://img.shields.io/badge/Ask%20Us-Anything-1abc9c.svg)](https://github.com/Hack-Repository/ "github.com/Hack-Repository")
+[![made-for-Developers](https://img.shields.io/badge/Made%20for-Developers-426658.svg)](https://github.com/Hack-Repository/POTD-Node.js-microservice "POTD")
+[![GitHub issues](https://img.shields.io/github/issues/Hack-Repository/POTD-Node.js-microservice.svg)](https://github.com/Hack-Repository/POTD-Node.js-microservice/issues)
+![GitHub last commit](https://img.shields.io/github/last-commit/Hack-Repository/POTD-Node.js-microservice.svg)
 
-> Download Extension: **[Here](https://github.com/Hack-Repository/POTD-UI "POTD Extension")**
+A Node.js microservice to power the problem of the day Google Chrome browser extension. The POTD browser extension beta release is available for download on @Github/Hack-Repository.
+
+> Download Beta version from Github: **[Download](https://github.com/Hack-Repository/POTD-GoogleChromeExtension "POTD Extension")**
 
 ## About the Service
 * This service exposes a simple **HTTP endpoint** for the **[POTD Client](https://github.com/Hack-Repository/POTD-UI "POTD Extension")** to access problem of the day from a pool of 750+ Data Structures and Algorithms Interview problems. 
@@ -12,7 +18,10 @@ It is a Node.js microservice to power the problem of the day Google Chrome brows
   
 ### POTD Client
 * It a Google Chrome Browser extension to provide a daily practice problem statement and problem link.
-* Currently in development. Stable version to be released on the Chrome Store.
+* Currently in development and is released as `beta` for feedback.
+* Stable version to be released on the Chrome Store.
+* **Extension Preview:**
+![POTD Chrome Extension](./assets/POTD_ExtensionUI.gif)
 
 ## System Architecture (High Level Design)
 
@@ -24,13 +33,13 @@ It is a Node.js microservice to power the problem of the day Google Chrome brows
 
 ## Application Details
 
-> Note: Unstable release, work is in progress. But feel free to raise issues & PR.
+> Note: Unstable release, work is in progress. Open to issues & pull requests.
 
 ### Maintainer
 **[Akash Chouhan](https://github.com/akashchouhan16 "akashchouhan16")**
 
 ### License
-**[MIT]()**
+**[MIT](https://github.com/Hack-Repository/POTD-Node.js-microservice/blob/master/LICENSE "License")**
 
 All rights reserved. Copyright (c) **@POTD/Akash Chouhan**.
 
