@@ -2,12 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const sanitizer = require('mongo-sanitize')
-const schedule = require('node-schedule');
 const hash_fxn = require('string-hash');
 
 const problems = require('../model/problem.model');
-const {FALL_BACK_GET, FALL_BACK_POST} = require('../api-fallback-responses/fallbacks-router');
 const sanitize = require('mongo-sanitize');
+const {FALL_BACK_GET, FALL_BACK_POST} = require('./api-fallback-responses/fallbacks-router');
+
 
 let iterator = 315;
 const LIMIT = 755;
