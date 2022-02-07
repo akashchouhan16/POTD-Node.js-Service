@@ -1,7 +1,7 @@
 {
-  "name": "poftd-server",
-  "version": "1.0.1",
-  "description": "Node server to power the POFTD-Client.",
+  "name": "potd-server",
+  "version": "1.0.3",
+  "description": "Node server to power the POTD-Client.",
   "main": "application.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,6 +17,7 @@
     "mongo-sanitize": "^1.1.0",
     "mongoose": "^6.1.4",
     "morgan": "^1.10.0",
+    "needle": "^3.0.0",
     "node-schedule": "^2.1.0",
     "string-hash": "^1.1.3"
   },

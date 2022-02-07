@@ -71,7 +71,10 @@ app.get('/clearlogs', (req,res)=>{
     }
 })
 const problemSchedulerRoute = require('./routes/problemScheduler.route');
-app.use('/', problemSchedulerRoute)
+const contestsRoute = require('./routes/contests.route');
+app.use('/', contestsRoute);
+app.use('/', problemSchedulerRoute);
+
 
 app.listen(PORT, (req,res)=>{
     const LOG={
