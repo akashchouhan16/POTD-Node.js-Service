@@ -8,7 +8,7 @@ const path = require('path');
 const sanitizer = require('mongo-sanitize');
 const morgan = require('morgan');
 const PORT = process.env.PORT || 5000;
-const NODE_ENV = process.env.NODE_ENV || production || development
+const NODE_ENV = process.env.NODE_ENV || "production" || "development"
 const {connectDB, DBConnectionStatus} = require('./config/Database');
 connectDB();
 
