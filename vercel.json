@@ -3,14 +3,14 @@
     "name": "potd-server",
     "builds": [
         {
-            "src": "application.js",
+            "src": "./application.js",
             "use": "@vercel/node"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/application.js"
+            "dest": "/"
         }
     ]
 }
