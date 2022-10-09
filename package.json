@@ -4,7 +4,6 @@
   "description": "Node server to power the POTD-Client.",
   "main": "application.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node application.js",
     "dev": "nodemon application.js"
   },

@@ -1,6 +1,5 @@
 {
     "version": 2,
-    "name": "potd-server",
     "builds": [
         {
             "src": "./application.js",
