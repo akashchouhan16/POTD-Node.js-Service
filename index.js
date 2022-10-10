@@ -85,3 +85,6 @@ app.listen(PORT, (req,res)=>{
     }
     console.table(LOG);
 })
+
+//app export for Vercel instance
+module.exports = app;
