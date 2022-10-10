@@ -16,8 +16,8 @@ app.use(cors());
 app.use(express.json())
 
 // Logging:
-let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-app.use(morgan('short', (NODE_ENV === 'development')? {stream:  accessLogStream}: null));
+// let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+// app.use(morgan('short', (NODE_ENV === 'development')? {stream:  accessLogStream}: null));
 
 
 
