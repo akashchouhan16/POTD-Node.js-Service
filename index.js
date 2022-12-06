@@ -8,7 +8,7 @@ const path = require('path');
 const sanitizer = require('mongo-sanitize');
 const morgan = require('morgan');
 const PORT = process.env.PORT || 5000;
-const NODE_ENV = process.env.NODE_ENV || production || development
+const NODE_ENV = process.env.NODE_ENV || "production" || "development"
 const {connectDB, DBConnectionStatus} = require('./config/Database');
 connectDB();
 
@@ -16,8 +16,8 @@ app.use(cors());
 app.use(express.json())
 
 // Logging:
-let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-app.use(morgan('short', (NODE_ENV === 'development')? {stream:  accessLogStream}: null));
+// let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+// app.use(morgan('short', (NODE_ENV === 'development')? {stream:  accessLogStream}: null));
 
 
 
@@ -85,3 +85,6 @@ app.listen(PORT, (req,res)=>{
     }
     console.table(LOG);
 })
+
+//app export for Vercel instance
+module.exports = app;
