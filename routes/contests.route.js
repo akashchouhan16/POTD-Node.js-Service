@@ -10,7 +10,7 @@ const valid_ids = ['codeforces', 'code_chef', 'leet_code', 'at_coder', 'hacker_r
 
 _router.get('/contests/:id', async(req,res)=>{
     try{
-        const platform = req.params.id;
+        const platform = req.params.id || valid_ids[0];
         let value = sanitizer(platform);
         let validity = false;
 
