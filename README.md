@@ -1,4 +1,4 @@
-<img src='assets/POTD_logo.png' width='120px' style="border-radius:20px">
+<img src='https://user-images.githubusercontent.com/56465610/215422984-4a9a6fec-dcb1-4f7f-92ba-b819af09dbb3.png' width='120px' style="border-radius:50px">
 
 # Problem Of The Day | Node.js microservice
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-8ebb9c.svg)](https://github.com/Hack-Repository/POTD-Node.js-microservice "Repo Maintained")
@@ -43,7 +43,8 @@ The extension is presently available as a beta release to generate user feedback
 
 
 
-![System Architecture](./assets/System%20Architecture%20_DFD.png)
+![System Architecture](https://user-images.githubusercontent.com/56465610/215423129-427e544b-5389-4b1e-b990-1d71c10001ad.png)
+
 
 ---
 
